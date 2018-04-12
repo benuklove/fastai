@@ -60,15 +60,12 @@ def move_files():
     """Move the files into the appropriate directories."""
 
     if train_percent + valid_percent + test_percent == 1.0:
-
         for c in classes:   # ie, classes = ['cats', 'dogs']
-
             path = downloads + c
             filenames = os.listdir(path)
             for file in filenames:
                 os.rename(os.path.join(path, file),
                           os.path.join(path, file.replace(' ', '')))
-
             src = os.listdir(path)
             count = len(src)
             num_test_files = round(count * test_percent)
@@ -96,6 +93,8 @@ def move_files():
         print("Splits don't add up to 1.")
 
 def cleanup():
+    """Remove whitespace and rename downloads directory"""
+
     new_name = 'data/' + ''.join(classes)
     os.rename(downloads, new_name.replace(' ', ''))
 
